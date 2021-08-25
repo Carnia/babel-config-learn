@@ -34,7 +34,9 @@ Babel + WebPack
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1", // 如果配置项内useBuiltIns 为 'entry'，就需要在资源文件内手动写上 require("@babel/polyfill");
-    "@babel/runtime-corejs3": "^7.15.3", // "@babel/plugin-transform-runtime"的corejs配置为3的时候需要这个，如果corejs是2，则需要"@babel/runtime-corejs2"
+    // "@babel/plugin-transform-runtime"的corejs配置为3的时候需要这个，如果corejs是2，则需要"@babel/runtime-corejs2"
+    // 详见官方文档https://www.babeljs.cn/docs/babel-plugin-transform-runtime#corejs
+    "@babel/runtime-corejs3": "^7.15.3",
     "core-js": "^3.6.5" // preset-env 需要用这个去转换、实现新的内置函数、实例方法
   }
 ```
