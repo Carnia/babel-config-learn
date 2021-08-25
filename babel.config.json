@@ -1,0 +1,41 @@
+{
+  "presets": [
+    [
+      "@babel/env", // 只有preset-env的话只转换语法，不能扩展新api
+      {
+        "targets": {
+          "edge": "17",
+          "firefox": "60",
+          "chrome": "67",
+          "safari": "11.1",
+          "android": "4.4",
+          "ie": "9"
+        },
+        // 扩展新api这里就需要我们使用  @babel/polyfill ，通过引入帮助函数，实现新的内置函数、实例方法的转换
+        // 有个 useBuiltIns 选项，用来控制怎么样处理 @babel/polyfill。
+        // 这里的 useBuiltIns 有三个可选属性： 'entry' | 'usage' | false，默认是 false
+        // 如果useBuiltIns 为 'entry'，就需要在资源文件内手动写上 require("@babel/polyfill");
+        // 如果useBuiltIns 为 'usage' 时，不需要手动引入 @babel/polyfill
+        "useBuiltIns": "usage",
+        // 如果使用了 useBuiltIns 选项，建议配置 corejs 选项，如果不配置，默认提供 2.x 版本的 corejs。
+        "corejs": "3" // 如果这里声明使用corejs3，则需要安装依赖"core-js^3"版本。
+        // 区别是，corsjs2生成的代码：require("core-js/modules/es.promise.finally.js")；corejs3生成的代码require("core-js/modules/es6.promise.finally.js");
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      // 帮助函数都是一样的，如果每个文件都引入同样的帮助文件（比如a和b文件都使用了Promise，则都需要在本文件内生成一个Promise帮助函数），会造成文件不必要的增大
+      // 所以有这个插件，让帮助函数统一从 @babel/runtime 引入，减少了文件体积。并且对变量名做了处理，避免了全局污染
+      "@babel/plugin-transform-runtime",
+      {
+        "absoluteRuntime": false,
+        // corejs: 2 仅支持全局变量（例如 Promise）和静态属性（例如 Array.from）的帮助函数统一处理，而corejs: 3 还支持实例属性（例如 [].includes）的帮助函数统一处理
+        "corejs": 3, // 如果这里声明使用corejs3，则需要安装依赖"@babel/runtime-corejs3"
+        "helpers": true,
+        "regenerator": true
+        // "version": "7.0.0-beta.0"
+      }
+    ]
+  ]
+}
