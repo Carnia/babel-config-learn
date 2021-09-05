@@ -1,0 +1,28 @@
+{
+  "name": "rollup-learn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "t": "tsc -w",
+    "build": "rollup -c",
+    "babel": "babel src --out-dir lib --extensions \".js,.ts\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-typescript": "^7.15.0",
+    "@babel/runtime": "^7.15.3",
+    "typescript": "^4.4.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@babel/runtime-corejs3": "^7.15.3",
+    "core-js": "^3.6.5"
+  }
+}
