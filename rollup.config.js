@@ -44,10 +44,11 @@ const config = {
   external: isNpmPkg ? [/@babel\/runtime/] : [],
   plugins: [
     json(),
+    nodeResolve(),
     commonjs({
+      include: /node_modules/,
       extensions: [".js", ".ts"],
     }),
-    nodeResolve(),
     babel({
       babelHelpers: "runtime",
       extensions: [".js", ".ts"],
